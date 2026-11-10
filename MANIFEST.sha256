@@ -1,7 +1,6 @@
 1afe120c5e2d62e6668b9ee19eaa0ab828b77077fc68e69271aef1411c6ca632  ./config/fastfetch/config.jsonc
 4092b8e91721322a2badd577d0ec0d396b94e71b49106f2f5bf6e4e2a31f15d2  ./config/fastfetch/logo.png
 413b39ade427320efbe55330d53ceb3b1959f4cf370385fb040905db9db2d605  ./config/fastfetch/random-logo.sh
-0f149f6c8651679f54ed5f10d06ecf658edecaffa7aab396db90f74a96ae27ea  ./config/fcitx5/conf/cached_layouts
 15ea33ff70f36605e433b486e45d71ef93eedcf9a5f96fbd957620e556c172b5  ./config/fcitx5/config
 0949fb3f6fdc4169d4d2a31678db055be5dba68ef812f0a30a60cfa5eb05b941  ./config/fcitx5/conf/notifications.conf
 d3ae6eafa1a28e5e87c0cd4a17ab0182bc18f671d255e509391374b66ad90076  ./config/fcitx5/profile
@@ -21,13 +20,14 @@ e45e588a89dc8ba5a7a04df8025aad352b6e3890be1657075e055beb1b23eebf  ./config/hypr/
 5e22ad81bcd1b6cd8976116047637728804c80c0d883e5079402a48857cdaae3  ./config/waybar/scripts/setup-ddc.sh
 057d6c9e7ea3f41d3d57442efc851066c27db952ee93014f598f1caf9508edf1  ./config/waybar/style.css
 32ea83859d3ade5d8913674b10312e97b80fd5e1a09efc496afdb202f406a6aa  ./config/waybar/theme.css
-2b7dbe5292b9aea364052515dba57f044eb2a42230fe33850968efc225a150a4  ./docs/preview.jpg
-01b05f2b3fecc5c6cc4a66d4bc1dbd43f2b5aadbc3473a3e6d5d0a45707fed12  ./README.md
+0a4929f740de0d66f39a05cbb16c0a2d9f5a96f21fc7d8e81a63cf643fdcb3f4  ./docs/desktop.jpg
+f849821770ff295d71cde42afcd7318c497dbfa64179581984b103b799ad6eb0  ./docs/terminal.jpg
+ba2ce9ccf47b8bcbd36e758215ddfbf227b390250be8a7482a5c4d2a6590cdd4  ./.gitignore
+623da2f3075544ee69538230d3f102eb55dfc150e32424a1bb37ead0b6be5c09  ./README.md
 d633e0c022f4dcbe2afed5053c8a2985350c0774d7257d07adc8583a3696ca82  ./shell/bashrc
 f5bf26d45c668e31eedd6f3f3f798261eef0e21dd97871a4ca44e6762ca75a86  ./wallpapers/1.jpg
 e557d63607beaa1321f8217f57ff39d32380b397619e45b7a4462c7e252e4cba  ./wallpapers/current-desktop.png
 f456ef19072ccff0f03e049c6129ce570619958f4416e2a248f721644efcd486  ./wallpapers/hyprlock-2.jpg
-98467c42e3dc580beb06c87e366aef81eaa365a7065084c362259a339de26c10  ./wallpapers/video/1.mp4
 b3b63330cd53172317397c1030122742eebcfdc5ca7c5019b4cd1744211fcfb3  ./wallpapers/收藏/deepseek-bao-shoubing.png
 54662081a7de2407499e6499b44fa88bdb713eebe27bfb1214d6268198fba79b  ./wallpapers/收藏/deepseek-jushou-jiayou.jpg
 3d2cf11e2883384026563866f97227ef4016d6a18358306c85a1ff8e0408361e  ./wallpapers/收藏/【哲风壁纸】AI拟人形象-deepseek.jpg
