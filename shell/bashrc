@@ -1,0 +1,38 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# ---------- 基础别名 ----------
+alias ls='ls --color=auto --group-directories-first'
+alias grep='grep --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# ---------- 提示符（Starship + Catppuccin Powerline） ----------
+export PATH="$HOME/.local/bin:$PATH"
+
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
+else
+    # 兜底：极简两行提示符
+    PS1='\[\e[38;2;203;166;247m\]╭─\[\e[0m\] \[\e[38;2;137;180;250m\]\w\[\e[0m\]\n\[\e[38;2;203;166;247m\]╰─\[\e[38;2;166;227;161m\]❯\[\e[0m\] '
+fi
+
+source /usr/share/nvm/init-nvm.sh
+xhost +local:docker >/dev/null 2>&1
+
+# ---------- kitty 首次打开时显示 fastfetch（随机壁纸 logo + 系统信息） ----------
+# 用 KITTY_PID 标记，同一个 kitty 实例只显示一次，新开标签/分屏不重复
+# 图片从 ~/大肥鱼 随机抽取，并按当前窗口大小自适应排版
+if [ -n "$KITTY_WINDOW_ID" ] && [ ! -e "/tmp/.fastfetch-$KITTY_PID" ] && command -v fastfetch >/dev/null 2>&1; then
+    touch "/tmp/.fastfetch-$KITTY_PID"
+    if [ -x "$HOME/.config/fastfetch/random-logo.sh" ]; then
+        "$HOME/.config/fastfetch/random-logo.sh"
+    else
+        fastfetch
+    fi
+fi

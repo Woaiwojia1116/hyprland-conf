@@ -1,0 +1,397 @@
+@import "theme.css";
+
+/* JetBrainsMono Nerd Font 提供图标；中文回落到思源黑体 */
+* {
+    font-family: "JetBrainsMono Nerd Font", "Source Han Sans CN", "Noto Sans", sans-serif;
+    font-size: 13px;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: @text;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* -------------------------------------------------
+ * L1：分组胶囊 / 独立工具胶囊
+ * 结构 = 壁纸的镜像：左半冷（冷白天空）、右半暖（落日橙）、
+ * 中央时钟是两侧的交汇点，并在正中做硬分割。
+ * ------------------------------------------------- */
+#nav,
+#hero,
+#media,
+#hardware,
+#status,
+#tray,
+#custom-power {
+    border-radius: 14px;
+    margin: 4px 0;
+    padding: 0 6px;
+    transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+/* 左极：冷。内嵌一道冷色竖边，像壁纸左侧的冷光 */
+#nav {
+    background: linear-gradient(100deg, rgba(24, 38, 52, 0.92) 0%, rgba(22, 25, 36, 0.80) 100%);
+    border: 1px solid rgba(143, 216, 232, 0.18);
+    box-shadow: inset 2px 0 0 rgba(143, 216, 232, 0.45), 0 2px 12px rgba(17, 17, 27, 0.32);
+}
+
+/* 右极：暖。从左到右一层层加暖，靠右最浓 */
+#media {
+    background: linear-gradient(100deg, rgba(29, 27, 30, 0.82) 0%, rgba(38, 29, 23, 0.85) 100%);
+    border: 1px solid rgba(245, 185, 138, 0.13);
+}
+
+#hardware {
+    background: linear-gradient(100deg, rgba(34, 30, 29, 0.83) 0%, rgba(43, 31, 23, 0.86) 100%);
+    border: 1px solid rgba(245, 185, 138, 0.16);
+}
+
+#status {
+    background: linear-gradient(100deg, rgba(41, 30, 23, 0.85) 0%, rgba(48, 33, 24, 0.88) 100%);
+    border: 1px solid rgba(245, 185, 138, 0.18);
+}
+
+#tray {
+    background: rgba(45, 32, 23, 0.86);
+    border: 1px solid rgba(245, 185, 138, 0.18);
+}
+
+#custom-power {
+    background: linear-gradient(100deg, rgba(48, 34, 25, 0.88) 0%, rgba(60, 38, 27, 0.92) 100%);
+    border: 1px solid rgba(245, 185, 138, 0.24);
+    box-shadow: inset -2px 0 0 rgba(245, 185, 138, 0.45);
+}
+
+/* 中央：与壁纸同一套逻辑 —— 左半冷、右半暖，中间硬分割（不渐变过渡） */
+#hero {
+    padding: 0 10px;
+    background: linear-gradient(90deg,
+            rgba(22, 36, 50, 0.93) 0%,
+            rgba(22, 36, 50, 0.91) 49.9%,
+            rgba(48, 32, 22, 0.92) 50.1%,
+            rgba(48, 32, 22, 0.94) 100%);
+    border: 1px solid rgba(230, 210, 186, 0.14);
+    box-shadow: -6px 0 18px rgba(143, 216, 232, 0.10), 6px 0 18px rgba(245, 185, 138, 0.12);
+}
+
+/* 分隔线：1px 光缝，几乎贯穿整个胶囊高度 —— 壁纸里那道墙的缩影 */
+#custom-seam {
+    min-width: 1px;
+    min-height: 30px;
+    margin: 0 12px;
+    padding: 0;
+    font-size: 1px;
+    background: linear-gradient(180deg,
+            rgba(255, 246, 232, 0.0) 0%,
+            rgba(255, 246, 232, 0.30) 8%,
+            rgba(255, 246, 232, 0.85) 20%,
+            rgba(255, 246, 232, 0.92) 50%,
+            rgba(255, 246, 232, 0.85) 80%,
+            rgba(255, 246, 232, 0.30) 92%,
+            rgba(255, 246, 232, 0.0) 100%);
+}
+
+/* -------------------------------------------------
+ * L3：组内内容全部去背景
+ * ------------------------------------------------- */
+#custom-launcher,
+#workspaces,
+#custom-notifications,
+#mpris,
+#cpu,
+#memory,
+#backlight,
+#custom-brightness-ext,
+#pulseaudio,
+#network,
+#battery {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 0 7px;
+    margin: 0;
+    transition: background-color 160ms ease, color 160ms ease;
+}
+
+/* 窗口标题：并入 nav 胶囊，用分隔线区分上下文 */
+#window {
+    background: transparent;
+    border: none;
+    border-left: 1px solid rgba(143, 216, 232, 0.28);
+    color: #a9c4d0;
+    font-size: 12px;
+    font-style: normal;
+    padding: 0 4px 0 12px;
+    margin: 4px 0 4px 4px;
+}
+
+/* 空 workspace 时不留下空胶囊 */
+window#waybar.empty #window {
+    padding: 0;
+    margin: 0;
+}
+
+/* 时钟：左日期 / 右时间，两半等宽 —— 接缝正好落在屏幕中线 */
+#clock {
+    background: transparent;
+    border: none;
+}
+
+#clock.date {
+    color: @cool-soft;
+    font-size: 12px;
+    font-weight: 400;
+    min-width: 56px;
+    padding: 0;
+}
+
+#clock.time {
+    color: @warm-soft;
+    font-size: 15px;
+    font-weight: 600;
+    min-width: 56px;
+    padding: 0;
+}
+
+/* ---------------- 左侧 ---------------- */
+#custom-launcher {
+    color: @accent;
+    font-size: 16px;
+    padding: 0 10px;
+}
+
+#custom-launcher:hover {
+    background: alpha(@accent, 0.14);
+    border-radius: 8px;
+}
+
+#workspaces button {
+    background: transparent;
+    color: rgba(127, 158, 174, 0.95);
+    border-radius: 8px;
+    padding: 0 6px;
+    margin: 2px 1px;
+    min-width: 22px;
+    transition: background-color 160ms ease, color 160ms ease;
+}
+
+#workspaces button:hover {
+    color: @cool-soft;
+    background: rgba(143, 216, 232, 0.14);
+}
+
+#workspaces button.active {
+    color: #0e1c26;
+    background: linear-gradient(180deg, @cool-soft 0%, @cool 100%);
+    font-weight: 700;
+}
+
+#workspaces button.urgent {
+    color: @crust;
+    background: @red;
+}
+
+#workspaces button.empty {
+    opacity: 0.35;
+}
+
+/* ---------------- 右侧：media ---------------- */
+#custom-notifications {
+    color: @warm;
+}
+
+#custom-notifications.none {
+    color: @overlay1;
+}
+
+#custom-notifications.notification {
+    color: @warm;
+}
+
+#custom-notifications.dnd-none,
+#custom-notifications.dnd-notification {
+    color: @overlay0;
+}
+
+#mpris {
+    color: @peach;
+}
+
+#mpris.playing {
+    color: @peach;
+}
+
+#mpris.paused,
+#mpris.stopped {
+    color: @overlay0;
+}
+
+#custom-notifications:hover,
+#mpris:hover {
+    background: rgba(245, 185, 138, 0.12);
+    border-radius: 8px;
+}
+
+/* ---------------- 右侧：hardware ---------------- */
+#cpu,
+#memory,
+#backlight {
+    color: #d6c9bf;
+}
+
+#custom-brightness-ext {
+    color: #d6c9bf;
+}
+
+#custom-brightness-ext.off {
+    color: @overlay0;
+}
+
+#custom-brightness-ext:hover {
+    background: rgba(245, 185, 138, 0.12);
+    border-radius: 8px;
+}
+
+#cpu.warning,
+#memory.warning {
+    color: @yellow;
+}
+
+#cpu.critical,
+#memory.critical {
+    color: @red;
+}
+
+/* ---------------- 右侧：status ---------------- */
+#pulseaudio {
+    color: #e7d7c7;
+}
+
+#pulseaudio.muted {
+    color: @overlay0;
+}
+
+#pulseaudio:hover {
+    background: rgba(245, 185, 138, 0.12);
+    border-radius: 8px;
+}
+
+#network {
+    color: #e7d7c7;
+}
+
+#network.disconnected {
+    color: @red;
+}
+
+#battery {
+    color: #e7d7c7;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: @green;
+}
+
+#battery.warning:not(.charging) {
+    color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+    background: alpha(@red, 0.12);
+    border-radius: 8px;
+}
+
+/* ---------------- 托盘 / 电源 ---------------- */
+#tray {
+    color: #e7d7c7;
+    padding: 0 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    background: alpha(@accent, 0.18);
+    border-radius: 8px;
+}
+
+#tray menu {
+    background: @mantle;
+    border: 1px solid @surface1;
+    border-radius: 10px;
+    color: #ffffff;
+}
+
+#tray menu menuitem {
+    color: #ffffff;
+    padding: 4px 10px;
+}
+
+#tray menu menuitem label {
+    color: #ffffff;
+}
+
+#tray menu menuitem:hover {
+    background: rgba(245, 185, 138, 0.18);
+    color: #ffffff;
+}
+
+#tray menu menuitem:disabled {
+    color: @overlay0;
+}
+
+#custom-power {
+    color: @warm;
+    font-size: 16px;
+    padding: 0 10px;
+}
+
+#custom-power:hover {
+    background: rgba(245, 185, 138, 0.16);
+    border-radius: 8px;
+}
+
+/* ---------------- 提示气泡 ----------------
+ * 深色底 → 文字必须显式指定白色；
+ * GTK 会在 tooltip 的 box / label 上各带一层主题色，逐层覆盖，
+ * 否则浅色主题（Adwaita）的深灰字会糊在深色底上。 */
+tooltip,
+tooltip.background,
+tooltip > box {
+    color: #ffffff;
+}
+
+tooltip {
+    background: alpha(@crust, 0.98);
+    border: 1px solid alpha(@accent, 0.25);
+    border-radius: 10px;
+    padding: 6px 10px;
+}
+
+tooltip label,
+tooltip label * {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+/* ---------------- 动画 ---------------- */
+@keyframes pulse {
+    to {
+        opacity: 0.55;
+    }
+}
+
+#battery.critical:not(.charging) {
+    animation: pulse 1.8s ease-in-out infinite alternate;
+}

@@ -1,0 +1,255 @@
+{
+    // 设计杂糅自: JaKooLit/Hyprland-Dots(胶囊布局) / catppuccin/waybar(配色)
+    //            end-4/dots-hyprland(悬浮形态) / swaync 官方 waybar 集成
+    // 布局: 分组胶囊 (group/nav, media, hardware, status)
+    // 注: 本机 swaync 0.12.x 用 -swb (新版手册写作 -swbp)
+    // ⚠ 图标码位由脚本注入; 勿手工插入 PUA 字符, 某些工具链会剥离
+
+    "layer": "top",
+    "position": "top",
+    "height": 38,
+    "margin-top": 8,
+    "margin-left": 10,
+    "margin-right": 10,
+    "spacing": 6,
+    "fixed-center": true,
+    "reload_style_on_change": true,
+
+    "modules-left": [
+        "group/nav"
+    ],
+    "modules-center": [
+        "group/hero"
+    ],
+    "modules-right": [
+        "group/media",
+        "group/hardware",
+        "group/status",
+        "tray",
+        "custom/power"
+    ],
+
+    "group/nav": {
+        "orientation": "inherit",
+        "modules": [
+            "custom/launcher",
+            "hyprland/workspaces",
+            "hyprland/window"
+        ]
+    },
+    "group/media": {
+        "orientation": "inherit",
+        "modules": [
+            "custom/notifications",
+            "mpris"
+        ]
+    },
+    "group/hardware": {
+        "orientation": "inherit",
+        "modules": [
+            "cpu",
+            "memory",
+            "backlight",
+            "custom/brightness-ext"
+        ]
+    },
+    "group/status": {
+        "orientation": "inherit",
+        "modules": [
+            "pulseaudio",
+            "network",
+            "battery"
+        ]
+    },
+    "group/hero": {
+        "orientation": "inherit",
+        "modules": [
+            "clock#date",
+            "custom/seam",
+            "clock#time"
+        ]
+    },
+
+    // 中央分隔：呼应壁纸中那道把冷/暖分隔开的“墙”
+    "custom/seam": {
+        "format": " ",
+        "tooltip": false
+    },
+
+    "custom/launcher": {
+        "format": " ",
+        "tooltip": false,
+        "on-click": "hyprlauncher",
+        "on-click-right": "kitty"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1"
+    },
+
+    "hyprland/window": {
+        "max-length": 24,
+        "separate-outputs": false,
+        "tooltip": false,
+        "cursor": false
+    },
+
+    "clock#date": {
+        "format": "{:L%b %d}",
+        "interval": 60,
+        "tooltip": false,
+        "cursor": false
+    },
+
+    "clock#time": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "<big>{:%Y 年 %B}</big>\n<tt>{calendar}</tt>",
+        "today-format": "<span color='#89dceb'><b>{}</b></span>",
+        "interval": 60,
+        "cursor": false
+    },
+
+    "custom/notifications": {
+        "exec": "swaync-client -swb",
+        "return-type": "json",
+        "format": "{icon}",
+        "tooltip-format": "{text} 条通知",
+        "format-icons": {
+            "notification": "",
+            "none": "󰂜",
+            "dnd-notification": "",
+            "dnd-none": "",
+            "inhibited-notification": "󰂠",
+            "inhibited-none": "󰂠",
+            "dnd-inhibited-notification": "",
+            "dnd-inhibited-none": ""
+        },
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -dnd-toggle"
+    },
+
+    "mpris": {
+        "format": " {dynamic}",
+        "format-paused": " {dynamic}",
+        "player-icons": {
+            "default": " "
+        },
+        "status-icons": {
+            "paused": " "
+        },
+        "dynamic-len": 26,
+        "title-len": 26,
+        "max-length": 32,
+        "tooltip": false
+    },
+
+    "cpu": {
+        "format": " {usage}%",
+        "interval": 5,
+        "tooltip-format": "CPU {usage}%",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        },
+        "cursor": false
+    },
+
+    "memory": {
+        "format": "󰍛 {percentage}%",
+        "interval": 30,
+        "tooltip-format": "内存 {used}M / {total}M",
+        "states": {
+            "warning": 80,
+            "critical": 92
+        },
+        "cursor": false
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": " {volume}%",
+        "format-icons": {
+            "headphone": "",
+            "headset": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "scroll-step": 2,
+        "tooltip-format": "{desc} {volume}%",
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-middle": "pavucontrol",
+        "on-click-right": "pavucontrol"
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": [
+            "",
+            ""
+        ],
+        "on-click": "/home/MC/.config/waybar/scripts/brightness.sh menu",
+        "on-scroll-up": "brightnessctl -e4 -n2 set 5%+ -q",
+        "on-scroll-down": "brightnessctl -e4 -n2 set 5%- -q",
+        "tooltip-format": "笔记本亮度 {percent}%\n左键：选择屏幕 / 精细调节"
+    },
+
+    "custom/brightness-ext": {
+        "exec": "/home/MC/.config/waybar/scripts/brightness.sh ext status",
+        "return-type": "json",
+        "interval": 60,
+        "signal": 8,
+        "format": "󰍹 {}",
+        "tooltip": true,
+        "on-click": "/home/MC/.config/waybar/scripts/brightness.sh menu ext",
+        "on-scroll-up": "/home/MC/.config/waybar/scripts/brightness.sh ext up",
+        "on-scroll-down": "/home/MC/.config/waybar/scripts/brightness.sh ext down"
+    },
+
+    "network": {
+        "format-wifi": "",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰤭",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
+        "tooltip-format-ethernet": "{ipaddr}/{cidr}",
+        "tooltip-format-disconnected": "未连接",
+        "cursor": false
+    },
+
+    "battery": {
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "interval": 10,
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "tooltip-format": "{capacity}% · {time}",
+        "cursor": false
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 6,
+        "show-passive-items": false
+    },
+
+    "custom/power": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "/home/MC/.config/waybar/scripts/power.sh"
+    }
+}

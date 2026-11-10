@@ -1,0 +1,35 @@
+/* ============================================
+ *  Catppuccin Mocha 调色板（catppuccin.com/ports/waybar）
+ *  换整套主题 = 换这一个文件
+ * ============================================ */
+
+@define-color base      #1e1e2e;
+@define-color mantle    #181825;
+@define-color crust     #11111b;
+
+@define-color text      #cdd6f4;
+@define-color subtext0  #a6adc8;
+@define-color subtext1  #bac2de;
+@define-color overlay0  #6c7086;
+@define-color overlay1  #7f849c;
+
+/* 强调色：sky/teal —— 与你 Hyprland 边框色（33ccff→00ff99）同冷色系 */
+@define-color accent    #89dceb;
+@define-color accent2   #94e2d5;
+
+/* --------------------------------------------
+ *  双色分割：对齐壁纸「左冷白 / 右暖橙 / 中间一道墙」
+ *  左侧模块取 cool，右侧模块取 warm，中央时钟为交汇点
+ * -------------------------------------------- */
+@define-color cool      #8fd8e8;
+@define-color cool-soft #c3e9f3;
+
+@define-color warm      #f5b98a;
+@define-color warm-soft #f8d3ab;
+
+@define-color mauve     #cba6f7;
+@define-color blue      #89b4fa;
+@define-color green     #a6e3a1;
+@define-color yellow    #f9e2af;
+@define-color peach     #fab387;
+@define-color red       #f38ba8;

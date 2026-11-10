@@ -1,0 +1,180 @@
+/* ============================================================
+ *  SwayNC 用户样式（只写覆盖项）
+ *  swaync 会先加载 /etc/xdg/swaync/style.css，再叠加本文件，
+ *  因此这里只需要放主题变量和想改的规则。
+ *  配色：Catppuccin Mocha，与 ~/.config/waybar/theme.css 一致
+ * ============================================================ */
+
+:root {
+  --cc-bg: rgba(30, 30, 46, 0.97);                 /* base */
+  --noti-border-color: rgba(137, 220, 235, 0.12);  /* accent */
+  --noti-bg: 24, 24, 37;                           /* mantle */
+  --noti-bg-alpha: 0.90;
+  --noti-bg-darker: rgb(17, 17, 27);               /* crust */
+  --noti-bg-hover: rgb(49, 50, 68);                /* surface0 */
+  --noti-bg-focus: rgba(49, 50, 68, 0.6);
+  --noti-close-bg: rgba(243, 139, 168, 0.16);      /* red */
+  --noti-close-bg-hover: rgba(243, 139, 168, 0.32);
+  --text-color: rgb(205, 214, 244);                /* text */
+  --text-color-disabled: rgb(108, 112, 134);       /* overlay0 */
+  --bg-selected: rgb(137, 220, 235);               /* accent */
+  --notification-icon-size: 56px;
+  --notification-app-icon-size: calc(var(--notification-icon-size) / 3);
+  --notification-group-icon-size: 32px;
+  --border: 1px solid var(--noti-border-color);
+  --border-radius: 16px;
+  --notification-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  --font-size-body: 14px;
+  --font-size-summary: 15px;
+}
+
+* {
+  font-family: "JetBrainsMono Nerd Font", "Source Han Sans CN", "Noto Sans", sans-serif;
+}
+
+/* ---------------- 通知中心主体 ---------------- */
+.control-center {
+  background: var(--cc-bg);
+  border: 1px solid var(--noti-border-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.42);
+  padding: 2px;
+}
+
+.widget {
+  margin: 6px;
+  padding: 8px 10px;
+}
+
+/* ---------------- 标题 / Clear All ---------------- */
+.widget-title {
+  margin-bottom: 0;
+}
+
+.widget-title > label {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-color);
+  letter-spacing: 0.2px;
+}
+
+.widget-title > button {
+  background: rgba(137, 220, 235, 0.10);
+  color: rgb(137, 220, 235);
+  border: 1px solid rgba(137, 220, 235, 0.18);
+  border-radius: 10px;
+  padding: 4px 14px;
+  font-weight: 600;
+  box-shadow: none;
+  text-shadow: none;
+  transition: background 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.widget-title > button:hover {
+  background: rgba(137, 220, 235, 0.20);
+  border-color: rgba(137, 220, 235, 0.40);
+}
+
+.widget-title > button:active {
+  background: rgba(137, 220, 235, 0.30);
+}
+
+/* ---------------- Do Not Disturb 开关 ---------------- */
+.widget-dnd {
+  margin-top: 0;
+}
+
+.widget-dnd > label {
+  color: rgb(186, 194, 222);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.widget-dnd switch {
+  background: rgba(88, 91, 112, 0.55);
+  border: 1px solid rgba(137, 220, 235, 0.14);
+  border-radius: 999px;
+  min-width: 44px;
+  min-height: 24px;
+  padding: 2px;
+  box-shadow: none;
+  transition: background 0.18s ease-in-out;
+}
+
+.widget-dnd switch:checked {
+  background: rgb(137, 220, 235);
+  border-color: rgb(137, 220, 235);
+}
+
+.widget-dnd switch slider {
+  background: rgb(205, 214, 244);
+  border: none;
+  border-radius: 999px;
+  min-width: 20px;
+  min-height: 20px;
+  margin: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  transition: background 0.18s ease-in-out;
+}
+
+.widget-dnd switch:checked slider {
+  background: rgb(17, 17, 27);
+}
+
+/* ---------------- 通知列表 ---------------- */
+.control-center .control-center-list {
+  background: transparent;
+  padding: 0 2px;
+}
+
+.notification-row .notification-background {
+  padding: 5px 10px;
+}
+
+.control-center .control-center-list .notification {
+  border-radius: var(--border-radius);
+  box-shadow: var(--notification-shadow);
+}
+
+.notification-row .notification-background .notification .notification-default-action {
+  padding: 2px;
+}
+
+/* 空列表提示 */
+.control-center .control-center-list-placeholder {
+  color: rgb(108, 112, 134);
+  font-size: 0.95rem;
+  opacity: 1;
+}
+
+/* 通知正文配色 */
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
+  color: rgb(205, 214, 244);
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body {
+  color: rgb(166, 173, 200);
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
+  color: rgb(108, 112, 134);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* ---------------- 滚动条 ---------------- */
+scrollbar {
+  background: transparent;
+  border: none;
+}
+
+scrollbar slider {
+  background: rgba(137, 220, 235, 0.22);
+  border-radius: 999px;
+  min-width: 4px;
+  min-height: 32px;
+}
+
+scrollbar slider:hover {
+  background: rgba(137, 220, 235, 0.40);
+}
